@@ -583,7 +583,11 @@ bool RenderTexture::saveToFile(const std::string& fileName, Image::Format format
     
     std::string fullpath = FileUtils::getInstance()->getWritablePath() + fileName;
     _saveToFileCommand.init(_globalZOrder);
-    _saveToFileCommand.func = CC_CALLBACK_0(RenderTexture::onSaveToFile, this, fullpath, isRGBA, false);
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32)
+    _saveToFileCommand.func = CC_CALLBACK_0(RenderTexture::onSaveToFile, this, fileName, isRGBA);
+#else
+    _saveToFileCommand.func = CC_CALLBACK_0(RenderTexture::onSaveToFile, this, fullpath, isRGBA);
+#endif
     
     Director::getInstance()->getRenderer()->addCommand(&_saveToFileCommand);
     return true;

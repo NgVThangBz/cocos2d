@@ -356,6 +356,7 @@ public class Cocos2dxHelper {
  	public static String getVersion() {
  		try {
  			String version = Cocos2dxActivity.getContext().getPackageManager().getPackageInfo(Cocos2dxActivity.getContext().getPackageName(), 0).versionName;
+             version += "." +  Cocos2dxActivity.getContext().getPackageManager().getPackageInfo(Cocos2dxActivity.getContext().getPackageName(), 0).versionCode;
  			return version;
  		} catch(Exception e) {
  			return "";

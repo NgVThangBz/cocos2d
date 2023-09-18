@@ -73,7 +73,7 @@ public class Cocos2dxHandler extends Handler {
     private void showDialog(Message msg) {
         Cocos2dxActivity theActivity = this.mActivity.get();
         DialogMessage dialogMessage = (DialogMessage)msg.obj;
-        new AlertDialog.Builder(theActivity)
+        new AlertDialog.Builder(theActivity, 4)
         .setTitle(dialogMessage.title)
         .setMessage(dialogMessage.message)
         .setPositiveButton("Ok", 

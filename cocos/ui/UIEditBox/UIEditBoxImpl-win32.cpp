@@ -271,13 +271,16 @@ namespace ui {
 
     void EditBoxImplWin::updateNativeFrame(const Rect& rect)
     {
+        auto glView = Director::getInstance()->getOpenGLView();
+        float height = this->_fontSize * glView->getScaleY();
+        this->setNativeFont(this->getNativeDefaultFontName(), this->_fontSize);
         ::SetWindowPos(
             _hwndEdit,
             HWND_NOTOPMOST,
-            rect.origin.x,
-            rect.origin.y,
-            rect.size.width,
-            rect.size.height,
+            rect.origin.x + abs(rect.size.height - height),
+            rect.origin.y + abs(rect.size.height - height)/2,
+            rect.size.width - +abs(rect.size.height - height),
+            height,
             SWP_NOZORDER);
     }
 

@@ -124,10 +124,17 @@ Application::Platform Application::getTargetPlatform()
 
 std::string Application::getVersion() {
     NSString* version = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
+    NSString* bundle = [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleVersion"];
+    std::string versionString = "";
+    std::string bundleString = "";
     if (version) {
-        return [version UTF8String];
+        versionString = [version UTF8String];
     }
-    return "";
+    if(bundle) {
+        bundleString = [bundle UTF8String];
+    }
+    std::string result = versionString + "(" + bundleString + ")";
+    return result;
 }
 
 bool Application::openURL(const std::string &url)

@@ -953,6 +953,7 @@ void Node::addChild(Node *child, int localZOrder, int tag)
 void Node::addChild(Node* child, int localZOrder, const std::string &name)
 {
     CCASSERT(child != nullptr, "Argument must be non-nil");
+    if(child->_parent != nullptr) return;
     CCASSERT(child->_parent == nullptr, "child already added. It can't be added again");
     
     addChildHelper(child, localZOrder, INVALID_TAG, name, false);
